@@ -1,0 +1,336 @@
+{
+    "intents": [
+        
+            {
+                "tag": "Matte",
+                "patterns": [
+                    "vad g\u00f6r du i Matten"
+                ],
+                "responses": [
+                    "q3wfqwfqw"
+                ],
+                "context_set": ""
+            },
+            {
+                "tag": "Matte",
+                "patterns": [
+                    "Vad har du l\u00e4rt dig"
+                ],
+                "responses": [
+                    "fqwfqw"
+                ],
+                "context_set": ""
+            },
+            {
+                "tag": "Matte",
+                "patterns": [
+                    "Har du n\u00e5gon note f\u00f6r Matten?"
+                ],
+                "responses": [
+                    "fqwf"
+                ],
+                "context_set": ""
+            },
+            {
+                "tag": "svenska",
+                "patterns": [
+                    "vad g\u00f6r du i Svenskan"
+                ],
+                "responses": [
+                    "qwfqwf"
+                ],
+                "context_set": ""
+            },
+            {
+                "tag": "svenska",
+                "patterns": [
+                    "Vad har du l\u00e4rt dig i Svenskan"
+                ],
+                "responses": [
+                    "qwfqw"
+                ],
+                "context_set": ""
+            },
+            {
+                "tag": "svenska",
+                "patterns": [
+                    "Har du n\u00e5gon note f\u00f6r Svenskan?"
+                ],
+                "responses": [
+                    "fqwfqw"
+                ],
+                "context_set": ""
+            },
+            {
+                "tag": "eng",
+                "patterns": [
+                    "vad g\u00f6r du i Engelskan"
+                ],
+                "responses": [
+                    "fqwf"
+                ],
+                "context_set": ""
+            },
+            {
+                "tag": "eng",
+                "patterns": [
+                    "Vad har du l\u00e4rt dig i Engelskan?"
+                ],
+                "responses": [
+                    "qwfq"
+                ],
+                "context_set": ""
+            },
+            {
+                "tag": "eng",
+                "patterns": [
+                    "Har du n\u00e5gon note f\u00f6r Engelskan?"
+                ],
+                "responses": [
+                    "wfqwf"
+                ],
+                "context_set": ""
+            },
+            {
+                "tag": "no",
+                "patterns": [
+                    "vad g\u00f6r du i NO"
+                ],
+                "responses": [
+                    "qwfqwf"
+                ],
+                "context_set": ""
+            },
+            {
+                "tag": "no",
+                "patterns": [
+                    "Vad har du l\u00e4rt dig i NO"
+                ],
+                "responses": [
+                    "qwfqw"
+                ],
+                "context_set": ""
+            },
+            {
+                "tag": "no",
+                "patterns": [
+                    "Har du n\u00e5gon note f\u00f6r NO?"
+                ],
+                "responses": [
+                    "fqwfqw"
+                ],
+                "context_set": ""
+            },
+            {
+                "tag": "SO",
+                "patterns": [
+                    "vad g\u00f6r du i SO"
+                ],
+                "responses": [
+                    "fqwf"
+                ],
+                "context_set": ""
+            },
+            {
+                "tag": "SO",
+                "patterns": [
+                    "Vad har du l\u00e4rt dig i SO"
+                ],
+                "responses": [
+                    "qwfqww"
+                ],
+                "context_set": ""
+            },
+            {
+                "tag": "SO",
+                "patterns": [
+                    "Har du n\u00e5gon note f\u00f6r SO?"
+                ],
+                "responses": [
+                    "fqwf"
+                ],
+                "context_set": ""
+            },
+            {
+                "tag": "idh",
+                "patterns": [
+                    "vad g\u00f6r du i Idrotten"
+                ],
+                "responses": [
+                    "qwfqw"
+                ],
+                "context_set": ""
+            },
+            {
+                "tag": "idh",
+                "patterns": [
+                    "Vad har du l\u00e4rt dig i Idrotten"
+                ],
+                "responses": [
+                    "fqwfqwf"
+                ],
+                "context_set": ""
+            },
+            {
+                "tag": "idh",
+                "patterns": [
+                    "Har du n\u00e5gon note f\u00f6r Idrotten?"
+                ],
+                "responses": [
+                    "qwfqwf"
+                ],
+                "context_set": ""
+            },
+            {
+                "tag": "mu",
+                "patterns": [
+                    "vad g\u00f6r du i Musiken"
+                ],
+                "responses": [
+                    "qwfqw"
+                ],
+                "context_set": ""
+            },
+            {
+                "tag": "mu",
+                "patterns": [
+                    "Vad har du l\u00e4rt dig i Musiken"
+                ],
+                "responses": [
+                    "fqwfqwf"
+                ],
+                "context_set": ""
+            },
+            {
+                "tag": "mu",
+                "patterns": [
+                    "Har du n\u00e5gon note f\u00f6r Musiken?"
+                ],
+                "responses": [
+                    "wfqwf"
+                ],
+                "context_set": ""
+            },
+            {
+                "tag": "bi",
+                "patterns": [
+                    "vad g\u00f6r du i Bilden"
+                ],
+                "responses": [
+                    "qwfqwf"
+                ],
+                "context_set": ""
+            },
+            {
+                "tag": "bi",
+                "patterns": [
+                    "Vad har du l\u00e4rt dig i Bilden"
+                ],
+                "responses": [
+                    "qwfqwf"
+                ],
+                "context_set": ""
+            },
+            {
+                "tag": "bi",
+                "patterns": [
+                    "Har du n\u00e5gon note f\u00f6r Bilden?"
+                ],
+                "responses": [
+                    "qwfqwf"
+                ],
+                "context_set": ""
+            },
+            {
+                "tag": "hkk",
+                "patterns": [
+                    "vad g\u00f6r du i hemkunskapen"
+                ],
+                "responses": [
+                    "qwfqwf"
+                ],
+                "context_set": ""
+            },
+            {
+                "tag": "hkk",
+                "patterns": [
+                    "Vad har du l\u00e4rt dig i hemkunskapen"
+                ],
+                "responses": [
+                    "qwfqwf"
+                ],
+                "context_set": ""
+            },
+            {
+                "tag": "hkk",
+                "patterns": [
+                    "Har du n\u00e5gon note f\u00f6r hemkunskapen?"
+                ],
+                "responses": [
+                    "qwfqwf"
+                ],
+                "context_set": ""
+            },
+            {
+                "tag": "sl",
+                "patterns": [
+                    "vad g\u00f6r du i Sl\u00f6jden"
+                ],
+                "responses": [
+                    "qwfqwfqwf"
+                ],
+                "context_set": ""
+            },
+            {
+                "tag": "sl",
+                "patterns": [
+                    "Vad har du l\u00e4rt dig i Sl\u00f6jden"
+                ],
+                "responses": [
+                    "fqwqffwq"
+                ],
+                "context_set": ""
+            },
+            {
+                "tag": "sl",
+                "patterns": [
+                    "Har du n\u00e5gon note f\u00f6r Sl\u00f6jden?"
+                ],
+                "responses": [
+                    "fqwfqwwqf"
+                ],
+                "context_set": ""
+            },
+            {
+                "tag": "sp",
+                "patterns": [
+                    "vad g\u00f6r du i Spanskan"
+                ],
+                "responses": [
+                    "qwfqwf"
+                ],
+                "context_set": ""
+            },
+            {
+                "tag": "sp",
+                "patterns": [
+                    "Vad har du l\u00e4rt dig i Spanskan"
+                ],
+                "responses": [
+                    "qwfqwf"
+                ],
+                "context_set": ""
+            },
+            {
+                "tag": "sp",
+                "patterns": [
+                    "Har du n\u00e5gon note f\u00f6r Spanskan?"
+                ],
+                "responses": [
+                    "qwfqf"
+                ],
+                "context_set": ""
+            }
+        
+    ]
+}

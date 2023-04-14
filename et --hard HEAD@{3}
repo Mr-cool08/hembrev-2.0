@@ -1,0 +1,57 @@
+[33m7762843[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m HEAD@{0}: rebase (finish): returning to refs/heads/master
+[33m7762843[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m HEAD@{1}: rebase (start): checkout HEAD~6
+[33m9c89008[m HEAD@{2}: rebase (finish): returning to refs/heads/master
+[33m9c89008[m HEAD@{3}: rebase (reword): Configure Git LFS for large file
+[33mfcb6abc[m HEAD@{4}: rebase (reword): a
+[33mc1a168d[m HEAD@{5}: rebase (reword): a
+[33m2418594[m HEAD@{6}: rebase (reword): a
+[33mbc61f42[m HEAD@{7}: rebase (reword): done some stuff
+[33m8fb00be[m HEAD@{8}: rebase: fast-forward
+[33m7762843[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m HEAD@{9}: rebase (start): checkout HEAD~6
+[33m695c90b[m HEAD@{10}: checkout: moving from master to master
+[33m695c90b[m HEAD@{11}: reset: moving to HEAD
+[33m695c90b[m HEAD@{12}: commit: Configure Git LFS for large file
+[33me0693a3[m HEAD@{13}: commit: a
+[33m7d0a102[m HEAD@{14}: commit: a
+[33m8fb00be[m HEAD@{15}: commit: done some stuff
+[33m7762843[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m HEAD@{16}: commit: on the train again
+[33maf36b0a[m HEAD@{17}: commit: bajskorv 123
+[33m23a7b84[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{18}: commit: done for today
+[33m3193bb5[m HEAD@{19}: commit: deleted some stuff
+[33m1f99f3d[m HEAD@{20}: commit: did some more stuff
+[33m165330d[m HEAD@{21}: commit: fix så att det halv funkar sitter i tåg och jobbar
+[33m02db1f1[m HEAD@{22}: commit: just some stuff
+[33m9ff4bfe[m HEAD@{23}: commit: 2.1
+[33m6beeae0[m HEAD@{24}: commit: now
+[33me795fd3[m HEAD@{25}: commit: yes
+[33m865e519[m HEAD@{26}: commit: si
+[33m4085bf6[m HEAD@{27}: commit: testing
+[33m96a0ad8[m HEAD@{28}: commit: yes
+[33mf9844d9[m HEAD@{29}: commit: yes
+[33me2ba5e1[m HEAD@{30}: commit: security stuff
+[33mfb06f99[m HEAD@{31}: commit: deleted some stuff
+[33me04c154[m HEAD@{32}: commit: stuff
+[33m6626b79[m HEAD@{33}: commit: stuff
+[33m147c664[m HEAD@{34}: commit: now it works
+[33m7697728[m HEAD@{35}: commit (merge): Merge branch 'master' of https://github.com/Mr-cool08/hembrev
+[33m0d1bb2b[m HEAD@{36}: commit: fixed the code and now we have goodbye messages that it chooses random
+[33mfd59109[m HEAD@{37}: commit: v2.1 i think
+[33m55961ca[m HEAD@{38}: commit: stuff
+[33m3e9f430[m HEAD@{39}: commit: yes
+[33mcbce561[m HEAD@{40}: commit: 2.0 BABY LETS GOOOO
+[33mcd379f1[m[33m ([m[1;33mtag: v2.0[m[33m)[m HEAD@{41}: commit: stuff
+[33m7996283[m HEAD@{42}: commit: yes
+[33mdffb828[m HEAD@{43}: commit: fixing stuff
+[33m25382ea[m HEAD@{44}: commit: did some better stuff
+[33mb4568f4[m HEAD@{45}: commit: did some stuff
+[33ma3bd002[m HEAD@{46}: pull --tags origin master: Fast-forward
+[33m6b9eebd[m HEAD@{47}: commit: did some stuff
+[33m9eea9b1[m HEAD@{48}: pull --tags origin master: Fast-forward
+[33m69e8fd6[m HEAD@{49}: commit: released the program
+[33m15a583c[m HEAD@{50}: commit: config
+[33m4b9b2bc[m HEAD@{51}: commit: fixed so its working now
+[33me480b91[m HEAD@{52}: pull --tags origin master: Merge made by the 'ort' strategy.
+[33md72c8ff[m HEAD@{53}: commit: now the program works
+[33m19cf943[m HEAD@{54}: commit: fixed the exe file and doing some testing
+[33mcf49ed6[m HEAD@{55}: commit: fixed my main file
+[33mcb65a4e[m[33m ([m[1;33mtag: hembrev[m[33m)[m HEAD@{56}: commit (initial): added it to github
