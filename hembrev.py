@@ -31,12 +31,14 @@ host_name = socket.gethostname()
 #getting the week number
 dt = datetime.date.today()
 wk = dt.isocalendar()[1]
-logging.basicConfig(filename=f'Error {host_name} {dt}.log', level=logging.ERROR,
-                    format='%(asctime)s - %(levelname)s - %(message)s')
-
 path = os.path.join(os.path.expanduser('~'), 'AppData', 'Roaming')
 newPath = path.replace(os.sep, '/')
 fullpath = newPath + "/hembrev"
+logfile = f"{fullpath}/ErrorLog {host_name} {dt}.log"
+logging.basicConfig(filename=logfile, level=logging.ERROR,
+                    format='%(asctime)s - %(levelname)s - %(message)s')
+
+
 
 
 
@@ -67,10 +69,15 @@ def upload_file():
 def decrypt():
     c = SymmetricCipher(password="Super secret password")
     try:
-        c.decrypt_file("password-encrypted.txt")
-        os.remove("password-encrypted.txt")
+        folder_path = os.path.join(newPath, "hembrev").replace("\\", "/")  # Combine newPath and folder name and replace backslashes with forward slashes
+        filename = os.path.join(folder_path, "password-encrypted.txt").replace("\\", "/")
+
+        c.decrypt_file(filename)
+        os.remove(filename)
     except OSError:
-        c.encrypt_file("password.txt")
+        folder_path = os.path.join(newPath, "hembrev").replace("\\", "/")  # Combine newPath and folder name and replace backslashes with forward slashes
+        filename = os.path.join(folder_path, "password.txt").replace("\\", "/")
+        c.encrypt_file(filename)
         decrypt()
 
 class Application(tk.Frame):
@@ -104,22 +111,29 @@ class Application(tk.Frame):
     
     #encrypt and decrypt for the password
     def encrypt(self):
-        c = SymmetricCipher(password="Super secret password")
-        try:
-            c.encrypt_file("password.txt")
-            os.remove("password.txt")
-        except OSError:
-            c.decrypt_file("password-encrypted.txt")
-            os.remove("password-encrypted.txt")
-            self.encrypt()
+            c = SymmetricCipher(password="Super secret password")
+            try:
+                folder_path = os.path.join(newPath, "hembrev")  # Combine newPath and folder name
+                filename = os.path.join(folder_path, "password.txt")
+                c.encrypt_file(filename)
+                os.remove(filename)
+            except OSError as e:
+                print(e)
+                os.remove("password-encrypted.txt")
+                self.encrypt()
     def decrypt(self):
         c = SymmetricCipher(password="Super secret password")
         try:
-            c.decrypt_file("password-encrypted.txt")
-            os.remove("password-encrypted.txt")
-        except OSError:
-            c.encrypt_file("password.txt")
-            os.remove("password.txt")
+            folder_path = os.path.join(newPath, "hembrev")  # Combine newPath and folder name
+            filename = os.path.join(folder_path, "password-encrypted.txt")
+            c.decrypt_file(filename)
+            os.remove(filename)
+        except OSError as e:
+            print(e)
+            folder_path = os.path.join(newPath, "hembrev").replace("\\", "/")  # Combine newPath and folder name and replace backslashes with forward slashes
+            filename = os.path.join(folder_path, "password.txt").replace("\\", "/")
+            c.encrypt_file(filename)
+            os.remove(filename)
             self.decrypt()
             
     
@@ -441,40 +455,54 @@ class Application(tk.Frame):
     def sendmail(self, message):
             #code for message in mail
             config = configparser.ConfigParser()
-            config.read('config.ini')
-            mail = config.get('login', 'email')
+            config_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), f'{fullpath}/config.ini')
+            print(config_file_path)
+            config.read(config_file_path)
+            mail = config.get('login', 'Email')
             name = mail.split(".")[0].capitalize()
-            good_bye = ["Ha en bra dag!:)", f"Mvh {name}", f"vänliga hälsningar {name}" ]
+            good_bye = ["Ha en bra dag! :)", f"Mvh {name}", f"vänliga hälsningar {name}", "Tack för din tid!", "Hoppas vi ses snart igen!", "Allt gott!", "Ta hand om dig!", "Vi hörs!", "Ha det så bra!", "Fortsatt trevlig dag!"]
             random_message = random.choice(good_bye)
             mail_body = message  + "\n" + "\n" +"\n" +"\n" +"\n" + random_message +"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"Detta mail var skickat igenom hembrevs programmet"
             
             self.decrypt()
             config = configparser.ConfigParser()
-            config.read('config.ini')
+            config.read(f"{fullpath}/config.ini")
             mail1 = config.get('Emails', 'email1')
             mail2 = config.get('Emails', 'email2')
             mail3 = config.get('Emails', 'Email3')
             mail4 = config.get('Emails', 'Email4')
             mail5 = config.get('Emails', 'Email5')
-            mail = config.get('login', 'email')
-            with open('password.txt','r') as file:
+            mail = config.get('login', 'Email')
+            folder_path = os.path.join(newPath, "hembrev").replace("\\", "/")  # Combine newPath and folder name and replace backslashes with forward slashes
+            filename = os.path.join(folder_path, "password.txt").replace("\\", "/")
+
+            
+            with open(filename,'r') as file:
                 password = file.read()
 
             #making the email
-            docname = 'hembrev v' + str(wk) + ".docx"
+            home_dir = os.path.expanduser("~")
+
+            # Combine the home directory with the relative path to the folder
+            folder_path = os.path.join(home_dir, "hembrev")
+
+            # Replace backslashes with forward slashes
+            folder_path = folder_path.replace("\\", "/")    
+            docname = os.path.join(folder_path, f"hembrev v{wk}.docx").replace("\\", "/")
             msg = MIMEMultipart()
             msg['From'] = mail
             receivers = [mail1, mail2, mail3, mail4, mail5]
             msg['To'] = ', '.join(receivers)
-            msg['Subject'] = 'hembrev v' + str(wk)
+            msg['Subject'] = f'hembrev v{wk}'
             body = mail_body
             msg.attach(MIMEText(body, 'plain'))
-            attachment = open(docname, 'rb')
-            part = MIMEBase('application', "octet-stream")
-            part.set_payload((attachment).read())
+            with open(docname, 'rb') as attachment:
+                part = MIMEBase('application', "octet-stream")
+                part.set_payload(attachment.read())
             encoders.encode_base64(part)
-            part.add_header('Content-Disposition', "attachment; filename= %s" % docname)
+            part.add_header('Content-Disposition', f"attachment; filename=hembrev v{wk}.docx")
             msg.attach(part)
+
 
             #sending the mail with a office 365 server
             #sending the mail with a office 365 server
@@ -789,8 +817,7 @@ def start(run):
             urllib.request.urlopen(host) #Python 3.x
             return True
         except:
-            # ändra till False
-            return True
+            return False
         
     if connect():
         filename = os.path.join(fullpath, "firstime.txt")
@@ -814,9 +841,12 @@ def setup(start,run):
         def encrypt():
             c = SymmetricCipher(password="Super secret password")
             try:
-                c.encrypt_file("password.txt")
-                os.remove("password.txt")
-            except OSError:
+                folder_path = os.path.join(newPath, "hembrev")  # Combine newPath and folder name
+                filename = os.path.join(folder_path, "password.txt")
+                c.encrypt_file(filename)
+                os.remove(filename)
+            except OSError as e:
+                print(e)
                 os.remove("password-encrypted.txt")
                 decrypt()
                 
@@ -843,7 +873,7 @@ def setup(start,run):
             "email5": Eemail
         }
         config_object["login"] = {
-            "email": login,
+            "Email": login,
         }
         
         if os.path.exists('config.ini'):
@@ -867,7 +897,7 @@ def setup(start,run):
 
             with open(filename, 'w') as f:
                 f.write(password)
-
+        time.sleep(1)
         password_write(password)
         encrypt()
         root.destroy()

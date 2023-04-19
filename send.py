@@ -22,7 +22,7 @@ def sendmail():
     mail3 = config.get('Emails', 'Email3')
     mail4 = config.get('Emails', 'Email4')
     mail5 = config.get('Emails', 'Email5')
-    mail = config.get('login', 'email')
+    mail = config.get('login', 'Email')
     with open('password.txt','r') as file:
         password = file.read()
 

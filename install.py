@@ -82,7 +82,11 @@ host_name = socket.gethostname()
 #getting the week number
 dt = datetime.date.today()
 wk = dt.isocalendar()[1]
-logging.basicConfig(filename=f'Error {host_name} {dt} installer.log', level=logging.ERROR,
+path = os.path.join(os.path.expanduser('~'), 'AppData', 'Roaming')
+newPath = path.replace(os.sep, '/')
+fullpath = newPath + "/hembrev"
+logfile = f"{fullpath}/ErrorLog {host_name} {dt}.log"
+logging.basicConfig(filename=logfile, level=logging.ERROR,
                     format='%(asctime)s - %(levelname)s - %(message)s')
 def open_program():
     # Construct the path to the program
