@@ -460,7 +460,15 @@ class Application(tk.Frame):
             config.read(config_file_path)
             mail = config.get('login', 'Email')
             name = mail.split(".")[0].capitalize()
-            good_bye = ["Ha en bra dag! :)", f"Mvh {name}", f"vänliga hälsningar {name}", "Tack för din tid!", "Hoppas vi ses snart igen!", "Allt gott!", "Ta hand om dig!", "Vi hörs!", "Ha det så bra!", "Fortsatt trevlig dag!"]
+            good_bye = ["Ha en bra dag!:)", f"Mvh {name}", f"vänliga hälsningar {name}", "Hoppas vi ses snart igen!", "Allt gott!", "Ta hand om dig!", "Vi hörs!", "Ha det så bra!", "Fortsatt trevlig dag!",
+"Ha det fint!", "Kram!", "Adjö!", "På återseende!", "Tack för allt!", "Hoppas du får en bra dag!", "Ta hand om dig själv och varandra!", "Ha en fantastisk dag!", "Trevlig vecka!", "Hoppas vi ses snart igen!",
+"Ha det bra på din resa!", "Lycka till!", "Vi hörs snart igen!", "Hoppas allt går bra för dig!", "Hoppas du får en bra dag!", "Det var trevligt att prata med er!", "Ta hand om dig själv!",
+"Fortsätt ha en bra dag!", "Var rädd om dig!", "Ha en underbar dag!", "Hoppas du har en bra vecka!", "Ha det så trevligt!", "Puss och kram!", "Vi ses snart!",
+"Hoppas du får en trevlig dag!", "Ha en fin dag!", "Hoppas allt går som du önskar!", "Tack för att du stannade upp en stund och läste hembrevet!", "Vi hörs igen snart!", "Hoppas du har en fantastisk dag!",
+"Ha en skön dag!", "Ha det gott!", "Vi ses vid ett annat tillfälle!",
+"Ta hand om dig själv och ha det bra!", "Hoppas du har en underbar dag!", "Ha en skön vecka!",
+"Hoppas vi kan stödja dig igen snart!", "Hoppas du får en lyckad dag!", "Ha det så kul!",
+"Ha en bra resa!", "Vi ses snart igen med nya möjligheter!"]
             random_message = random.choice(good_bye)
             mail_body = message  + "\n" + "\n" +"\n" +"\n" +"\n" + random_message +"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"Detta mail var skickat igenom hembrevs programmet"
             
