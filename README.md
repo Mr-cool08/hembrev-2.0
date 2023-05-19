@@ -16,7 +16,7 @@ Om du behöver hjälp med installationen eller har andra frågor gällande progr
 
 För att använda programmet, följ dessa enkla steg:
 
-1. Ladda ner installationsfilen från [länk här] och följ instruktionerna för installationen.
+1. Ladda ner installationsfilen från https://github.com/Mr-cool08/hembrev-2.0/releases och följ instruktionerna för installationen.
 2. Öppna programmet och följ de angivna stegen.
 3. Besvara frågorna som ställs för att skapa ditt hembrev.
 4. Programmet kommer att generera ett dokument med ditt hembrev och skicka det automatiskt till den angivna maillistan.
