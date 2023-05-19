@@ -820,19 +820,19 @@ def run(Application):
     
 def start(run):
     
-    def connect(host='http://google.com'):
+    def connect(host='http://google.com'): #checks if connected to internet
         try:
-            urllib.request.urlopen(host) #Python 3.x
+            urllib.request.urlopen(host) 
             return True
         except:
             return False
         
-    if connect():
+    if connect(): #if connectet to the internet then start the program else error
         filename = os.path.join(fullpath, "firstime.txt")
         if os.path.exists(filename):
             run(Application)
         else:
-            with open(filename, 'w') as file:
+            with open(filename, 'w') as file: #create the first time file that checks if the config files is setup
                 file.write('This file is only so the program knows if its the first time. DO NOT DELETE')
                 setup(start , run)
     else:
@@ -943,6 +943,7 @@ def setup(start,run):
     password_label = tk.Label(root, text="Lösenord: ")
     password_entry = tk.Entry(root, textvariable=password_var, show="*")
     submit_button = tk.Button(root, text="Submit", command=lambda: submit(start, run))
+    
 
 
     email1_label.grid(row=0, column=0, padx=5, pady=5)
