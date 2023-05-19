@@ -20,9 +20,6 @@ Jag strävar efter att göra mitt bästa för att säkerställa att mitt projekt
 
 Jag rekommenderar också att användarna följer bästa praxis för datasäkerhet, inklusive att hålla sina system uppdaterade med de senaste säkerhetskorrigeringarna och att vara medvetna om potentiella hot och bedrägerier.
 
-## Belöning
-
-Jag är tacksam för att användare rapporterar säkerhetsproblem och hjälper mig att förbättra projektets säkerhet. För att visa min uppskattning kan jag tillhandahålla en belöning för de mest betydelsefulla och väsentliga säkerhetsrapporterna. Belöningen bestäms baserat på rapportens allvarlighetsgrad och påverkan på projektet.
 
 ## Kontakta mig
 
