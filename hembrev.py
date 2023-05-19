@@ -483,7 +483,7 @@ class Application(tk.Frame):
             auto_message = config.get('Settings', 'auto_message')
             random_message = random.choice(good_bye)
             
-            if auto_message == 0:
+            if auto_message == "0":
                 random_message = " "
             
                 
