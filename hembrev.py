@@ -37,12 +37,6 @@ fullpath = newPath + "/hembrev"
 logfile = f"{fullpath}/ErrorLog {host_name} {dt}.log"
 logging.basicConfig(filename=logfile, level=logging.ERROR,
                     format='%(asctime)s - %(levelname)s - %(message)s')
-
-
-
-
-
-
 def upload_file():
     """
     Uploads the "error.log" file to a Flask app via a POST request.
