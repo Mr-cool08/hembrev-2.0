@@ -469,8 +469,7 @@ class Application(tk.Frame):
 "Ta hand om dig själv och ha det bra!", "Hoppas du har en underbar dag!", "Ha en skön vecka!",
 "Hoppas vi kan stödja dig igen snart!", "Hoppas du får en lyckad dag!", "Ha det så kul!",
 "Ha en bra resa!", "Vi ses snart igen med nya möjligheter!"]
-            random_message = random.choice(good_bye)
-            mail_body = message  + "\n" + "\n" +"\n" +"\n" +"\n" + random_message +"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"Detta mail var skickat igenom hembrevs programmet"
+           
             
             self.decrypt()
             config = configparser.ConfigParser()
@@ -481,6 +480,14 @@ class Application(tk.Frame):
             mail4 = config.get('Emails', 'Email4')
             mail5 = config.get('Emails', 'Email5')
             mail = config.get('login', 'Email')
+            auto_message = config.get('Settings', 'auto_message')
+            random_message = random.choice(good_bye)
+            if auto_message == 0:
+                random_message = ""
+            
+                
+            
+            mail_body = message  + "\n" + "\n" +"\n" +"\n" +"\n" + random_message +"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"Detta mail var skickat igenom hembrevs programmet"
             folder_path = os.path.join(newPath, "hembrev").replace("\\", "/")  # Combine newPath and folder name and replace backslashes with forward slashes
             filename = os.path.join(folder_path, "password.txt").replace("\\", "/")
 
@@ -845,6 +852,18 @@ def start(run):
     
     
 def setup(start,run):
+    folder_path = os.path.join(newPath, "hembrev")  # Combine newPath and folder name
+    filename = os.path.join(folder_path, "password-encrypted.txt")
+    try:
+        os.remove(filename)
+    except:
+        logging.info('password-encrypted.txt not found')
+    folder_path = os.path.join(newPath, "hembrev")  # Combine newPath and folder name
+    filename = os.path.join(folder_path, "password.txt")
+    try:
+        os.remove(filename)
+    except:
+        logging.info('password.txt not found')
     def submit(start, run):
         def encrypt():
             c = SymmetricCipher(password="Super secret password")
@@ -855,7 +874,9 @@ def setup(start,run):
                 os.remove(filename)
             except OSError as e:
                 print(e)
-                os.remove("password-encrypted.txt")
+                folder_path = os.path.join(newPath, "hembrev")  # Combine newPath and folder name
+                filename = os.path.join(folder_path, "password-encrypted.txt")
+                os.remove(filename)
                 decrypt()
                 
         global Aemail
@@ -883,6 +904,10 @@ def setup(start,run):
         config_object["login"] = {
             "Email": login,
         }
+        
+        config_object["Settings"] = {
+        "auto_message": str(checkbox_var.get()),
+    }
         
         if os.path.exists('config.ini'):
             os.remove('config.ini')
@@ -926,6 +951,7 @@ def setup(start,run):
     email5_var = tk.StringVar()
     login_var = tk.StringVar()
     password_var = tk.StringVar()
+    checkbox_var = tk.IntVar()
 
     entry = tk.Entry(root, textvariable=email1_var)
     email1_label = tk.Label(root, text="Email 1: ")
@@ -942,6 +968,8 @@ def setup(start,run):
     login_entry = tk.Entry(root, textvariable=login_var)
     password_label = tk.Label(root, text="Lösenord: ")
     password_entry = tk.Entry(root, textvariable=password_var, show="*")
+    checkbox_label = tk.Label(root, text="Auto meddelande i mailet: ")
+    checkbox = tk.Checkbutton(root, variable=checkbox_var)
     submit_button = tk.Button(root, text="Submit", command=lambda: submit(start, run))
     
 
@@ -960,7 +988,9 @@ def setup(start,run):
     login_entry.grid(row=5, column=1, padx=5, pady=5)
     password_label.grid(row=6, column=0, padx=5, pady=5)
     password_entry.grid(row=6, column=1, padx=5, pady=5)
-    submit_button.grid(row=7, column=1, padx=5, pady=5)
+    checkbox_label.grid(row=7, column=0, padx=5, pady=5)
+    checkbox.grid(row=7, column=1, padx=5, pady=5)
+    submit_button.grid(row=8, column=1, padx=5, pady=5)
 
     root.mainloop()
     
