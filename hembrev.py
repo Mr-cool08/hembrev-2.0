@@ -703,7 +703,7 @@ class Application(tk.Frame):
             latest_file = files[0]
             os.startfile(latest_file)
         else:
-            print("No Word documents found in the specified folder.")
+            messagebox.showerror("Error", f"Du har inga dokument sparade \n {e}")
 
 
     def restart_program(self):
@@ -755,8 +755,6 @@ def start(run):
         if os.path.exists(filename):
             run(Application)
         else:
-            with open(filename, 'w') as file: #create the first time file that checks if the config files is setup
-                file.write('This file is only so the program knows if its the first time. DO NOT DELETE')
                 setup(start , run)
     else:
         messagebox.showerror("Error", "Du behöver internet för att programmet ska funka")
@@ -834,7 +832,7 @@ def setup(start,run):
 
             with open(filename, 'w') as conf:
                 config_object.write(conf)
-        config_write(config_object)
+        
             
         if os.path.exists('password.txt'):
             os.remove('password.txt')
@@ -847,10 +845,31 @@ def setup(start,run):
             with open(filename, 'w') as f:
                 f.write(password)
         time.sleep(1)
-        password_write(password)
-        encrypt()
-        root.destroy()
-        start(run)
+        try: 
+            server = smtplib.SMTP('smtp.office365.com', 587)
+            server.connect("smtp.office365.com",587)
+            server.ehlo()
+            server.starttls()
+            server.ehlo()
+            server.login(login, password)
+            server.quit()
+            time.sleep(1)
+            config_write(config_object)
+            password_write(password)
+            encrypt()
+            filename = os.path.join(fullpath, "firstime.txt")
+            with open(filename, 'w') as file: #create the first time file that checks if the config files is setup
+                file.write('This file is only so the program knows if its the first time. DO NOT DELETE')
+            root.destroy()
+            start(run)
+        except smtplib.SMTPAuthenticationError as e:
+            print(e)
+            messagebox.showerror("Error", "E-postadressen eller lösenordet är felaktigt")
+        except Exception as e:
+            logging.info(e) 
+            messagebox.showerror("Error", f"Något gick fel. Kontakta gärna Liam Suorsa. \n {e}")
+            
+        
         
         
         
