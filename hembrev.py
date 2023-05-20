@@ -4,28 +4,21 @@ import datetime
 import socket
 import smtplib
 import logging
+import glob
 from tkinter import messagebox
 from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email.mime.text import MIMEText
 from email import encoders
 from windtalker import SymmetricCipher
-import os
 import configparser
 import random
 import tkinter as tk
 from configparser import ConfigParser
-from cryptography.fernet import Fernet
 import time
 import requests
-import zipfile
-import sys
-import shutil
 import urllib.request
-from urllib.request import Request, urlopen
-from urllib.error import URLError, HTTPError
 import os
-import requests
 import socket
 host_name = socket.gethostname()
 #getting the week number
@@ -256,13 +249,25 @@ class Application(tk.Frame):
         
      #creating the document with all inputs
     def create_document(self):
-        
         document = Document()
 
         document.add_heading('Hembrev', 0)
-        
-        
-        #creating table for all subjects
+
+        # Create table for all subjects
+        subject_data = [
+            ('Matte', self.matte_gör.get(), self.matte_lärt.get(), self.matte_note.get()),
+            ('Svenska', self.sv_gör.get(), self.sv_lärt.get(), self.sv_note.get()),
+            ('Engelska', self.eng_gör.get(), self.eng_lärt.get(), self.eng_note.get()),
+            ('NO', self.no_gör.get(), self.no_lärt.get(), self.no_note.get()),
+            ('SO', self.so_gör.get(), self.so_lärt.get(), self.so_note.get()),
+            ('Idrott', self.idh_gör.get(), self.idh_lärt.get(), self.idh_note.get()),
+            ('Musik', self.mu_gör.get(), self.mu_lärt.get(), self.mu_note.get()),
+            ('Bild', self.bi_gör.get(), self.bi_lärt.get(), self.bi_note.get()),
+            ('Hemkunskap', self.hkk_gör.get(), self.hkk_lärt.get(), self.hkk_note.get()),
+            ('Språk', self.sp_gör.get(), self.sp_lärt.get(), self.sp_note.get()),
+            ('Slöjd', self.sl_gör.get(), self.sl_lärt.get(), self.sl_note.get())
+        ]
+
         table = document.add_table(rows=1, cols=4)
         table.style = 'Table Grid'
         hdr_cells = table.rows[0].cells
@@ -271,137 +276,32 @@ class Application(tk.Frame):
         hdr_cells[2].text = 'DETTA HAR JAG LÄRT MIG:'
         hdr_cells[3].text = 'notes'
 
-        armatte = self.matte_gör.get()
-        lermatte = self.matte_lärt.get()
-        notematte = self.matte_note.get()
-        row_cells = table.add_row().cells
-        row_cells[0].text = 'Matte'
-        row_cells[1].text = armatte
-        row_cells[2].text = lermatte
-        row_cells[3].text = notematte
-        
-        
-        arsv = self.sv_gör.get()
-        lersv = self.sv_lärt.get()
-        notesv = self.sv_note.get()
-        row_cells = table.add_row().cells
-        row_cells[0].text = 'Svenska'
-        row_cells[1].text = arsv
-        row_cells[2].text = lersv
-        row_cells[3].text = notesv
+        for subject_row in subject_data:
+            row_cells = table.add_row().cells
+            for i, value in enumerate(subject_row):
+                row_cells[i].text = value
 
-        areng = self.eng_gör.get()
-        lereng = self.eng_lärt.get()
-        noteeng = self.eng_note.get()
-        row_cells = table.add_row().cells
-        row_cells[0].text = 'Engelska'
-        row_cells[1].text = areng
-        row_cells[2].text = lereng
-        row_cells[3].text = noteeng
-        
-        arno = self.no_gör.get()
-        lerno = self.no_lärt.get()
-        noteno = self.no_note.get()
-        row_cells = table.add_row().cells
-        row_cells[0].text = 'NO'
-        row_cells[1].text = arno
-        row_cells[2].text = lerno
-        row_cells[3].text = noteno
-        
-        arso = self.so_gör.get()
-        lerso = self.so_lärt.get()
-        noteso = self.so_note.get()
-        row_cells = table.add_row().cells
-        row_cells[0].text = 'NO'
-        row_cells[1].text = arso
-        row_cells[2].text = lerso
-        row_cells[3].text = noteso
-        
-        aridh = self.idh_gör.get()
-        leridh = self.idh_lärt.get()
-        noteidh = self.idh_note.get()
-        row_cells = table.add_row().cells
-        row_cells[0].text = 'Idrott'
-        row_cells[1].text = aridh
-        row_cells[2].text = leridh
-        row_cells[3].text = noteidh
-        
-        armu = self.mu_gör.get()
-        lermu = self.mu_lärt.get()
-        notemu = self.mu_note.get()
-        row_cells = table.add_row().cells
-        row_cells[0].text = 'Musik'
-        row_cells[1].text = armu
-        row_cells[2].text = lermu
-        row_cells[3].text = notemu
-        
-        arbi = self.bi_gör.get()
-        lerbi = self.bi_lärt.get()
-        notebi = self.bi_note.get()
-        row_cells = table.add_row().cells
-        row_cells[0].text = 'Bild'
-        row_cells[1].text = arbi
-        row_cells[2].text = lerbi
-        row_cells[3].text = notebi
-        
-        arhkk = self.hkk_gör.get()
-        lerhkk = self.hkk_lärt.get()
-        notehkk = self.hkk_note.get()
-        row_cells = table.add_row().cells
-        row_cells[0].text = 'Hemkunskap'
-        row_cells[1].text = arhkk
-        row_cells[2].text = lerhkk
-        row_cells[3].text = notehkk
-        
-        arsp = self.sp_gör.get()
-        lersp = self.sp_lärt.get()
-        notesp = self.sp_note.get()
-        row_cells = table.add_row().cells
-        row_cells[0].text = 'Språk'
-        row_cells[1].text = arsp
-        row_cells[2].text = lersp
-        row_cells[3].text = notesp
-        
-        arsl = self.sl_gör.get()
-        lersl = self.sl_lärt.get()
-        notesl = self.sl_note.get()
-        row_cells = table.add_row().cells
-        row_cells[0].text = 'Slöjd'
-        row_cells[1].text = arsl
-        row_cells[2].text = lersl
-        row_cells[3].text = notesl
-        
-    
-        #creating table for "händelser"
+        # Create table for "händelser"
         document.add_heading('Händelser', 0)
         table = document.add_table(rows=1, cols=2)
         table.style = 'Table Grid'
         hdr_cells = table.rows[0].cells
         hdr_cells[0].text = 'Vad'
         hdr_cells[1].text = 'När'
-        
-        #only if the checkbox is checked it inputs it else it will just be empty
+
         if self.händelser_checked.get():
-            händelse_vad1 = self.händelse_vad1.get()
-            händelse_när1 = self.händelse_när1.get() 
-            händelse_när1 = self.händelse_när1.get() 
-            row_cells = table.add_row().cells
-            row_cells[0].text = händelse_vad1
-            row_cells[1].text = händelse_när1
-            
-            händelse_vad2 = self.händelse_vad2.get()
-            händelse_när2 = self.händelse_när2.get()
-            row_cells = table.add_row().cells
-            row_cells[0].text = händelse_vad2
-            row_cells[1].text = händelse_när2
+            händelse_data = [
+                (self.händelse_vad1.get(), self.händelse_när1.get()),
+                (self.händelse_vad2.get(), self.händelse_när2.get()),
+                (self.händelse_vad3.get(), self.händelse_när3.get())
+            ]
 
-            händelse_vad3 = self.händelse_vad3.get()
-            händelse_när3 = self.händelse_när3.get()
-            row_cells = table.add_row().cells
-            row_cells[0].text = händelse_vad3
-            row_cells[1].text = händelse_när3
+            for händelse_row in händelse_data:
+                row_cells = table.add_row().cells
+                for i, value in enumerate(händelse_row):
+                    row_cells[i].text = value
 
-        #creating table for "rester"
+        # Create table for "rester"
         document.add_heading('Rester', 0)
         table = document.add_table(rows=1, cols=3)
         table.style = 'Table Grid'
@@ -409,41 +309,26 @@ class Application(tk.Frame):
         hdr_cells[0].text = 'Vad'
         hdr_cells[1].text = 'Planering'
         hdr_cells[2].text = 'När'
-        if self.rest_checked.get():
-            rest_vad1 = self.rest_vad1.get()
-            rest_hur1 = self.rest_hur1.get()
-            rest_när1 = self.rest_när1.get()
-            row_cells = table.add_row().cells
-            row_cells[0].text = rest_vad1
-            row_cells[1].text = rest_hur1
-            row_cells[2].text = rest_när1
-            
-            rest_vad2 = self.rest_vad2.get()
-            rest_hur2 = self.rest_hur2.get()
-            rest_när2 = self.rest_när2.get()
-            row_cells = table.add_row().cells
-            row_cells[0].text = rest_vad2
-            row_cells[1].text = rest_hur2
-            row_cells[2].text = rest_när2
-            
-            rest_vad3 = self.rest_vad3.get()
-            rest_hur3 = self.rest_hur3.get()
-            rest_när3 = self.rest_när3.get()
-            row_cells = table.add_row().cells
-            row_cells[0].text = rest_vad3
-            row_cells[1].text = rest_hur3
-            row_cells[2].text = rest_när3
 
+        if self.rest_checked.get():
+            rest_data = [
+                (self.rest_vad1.get(), self.rest_hur1.get(), self.rest_när1.get()),
+                (self.rest_vad2.get(), self.rest_hur2.get(), self.rest_när2.get()),
+                (self.rest_vad3.get(), self.rest_hur3.get(), self.rest_när3.get())
+            ]
+
+            for rest_row in rest_data:
+                row_cells = table.add_row().cells
+                for i, value in enumerate(rest_row):
+                    row_cells[i].text = value
 
         path = os.path.expanduser('~')
-        path1 = path + "\\hembrev\\"
-        if os.path.isdir(path1):
-            pass
-        else:
-            os.mkdir(path1)
-            
-        #saving the document with the week number
-        document.save(fr'{path1}Hembrev v{wk}.docx')
+        path1 = os.path.join(path, "hembrev")
+        os.makedirs(path1, exist_ok=True)
+
+        # Saving the document with the week number
+        document.save(fr'{path1}\\Hembrev v{wk}.docx')
+
         
     
     def sendmail(self, message):
@@ -568,15 +453,27 @@ class Application(tk.Frame):
             server.send_message(msg)
             server.quit()
             self.encrypt()
+            print("done")
     #when the user presses the sumbit button
     def submit(self):
-        if self.mail_message_checked.get() == 1:
-            message = self.message.get().strip() or ' '
-        else:
-            message = ' '
-        self.create_document()
-        self.master.destroy()
-        self.sendmail(message)
+        try:
+            if self.mail_message_checked.get() == 1:
+                message = self.message.get().strip() or ' '
+            else:
+                message = ' '
+            self.create_document()
+            self.master.destroy()
+            self.sendmail(message)
+        except Exception as e:
+            messagebox.showerror("Error", f"Error kontakta Liam Suorsa \n {e}")
+            logging.error('An error occurred while submitting: %s', e)
+            path = os.path.expanduser('~')
+            path1 = path + "\\hembrev\\"
+            path = os.path.realpath(path1)
+            os.startfile(path)
+            result = upload_file()
+            print(result)
+            
 
 
 
@@ -784,7 +681,31 @@ class Application(tk.Frame):
         self.submit_button.grid(row=50, column=1, columnspan=3, pady=10)
         self.restart_button = tk.Button(self.master, text="Ändra E-epostadress", command=self.restart_program)
         self.restart_button.pack(side=tk.LEFT, anchor=tk.SW, padx=10, pady=10)
+        self.restart_button = tk.Button(self.master, text="Vissa senaste hembrevet", command=self.latest_hembrev)
+        self.restart_button.pack(side=tk.LEFT, anchor=tk.SW, padx=10, pady=10)
+    def latest_hembrev(self):
         
+
+        folder_path = r"C:\Users\liam.suorsa08\hembrev"
+        extension = "*.docx"
+
+        # Get a list of all Word documents in the folder
+        files = glob.glob(os.path.join(folder_path, extension))
+
+        # Filter out temporary files
+        files = [file for file in files if not os.path.basename(file).startswith("~$")]
+
+        # Sort the remaining files by creation time in descending order
+        files.sort(key=lambda x: os.path.getctime(x), reverse=True)
+
+        # Open the Word document with the latest creation date
+        if files:
+            latest_file = files[0]
+            os.startfile(latest_file)
+        else:
+            print("No Word documents found in the specified folder.")
+
+
     def restart_program(self):
         # display a message to the user
         messagebox.showinfo("Ändra E-epostadress", "Starta om programmet för att genomföra ändringar")
