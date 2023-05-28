@@ -54,17 +54,22 @@ def upload_file():
 
 
 def decrypt():
-    c = SymmetricCipher(password="Super secret password")
-    try:
-        folder_path = os.path.join(newPath, "hembrev").replace("\\", "/")  # Combine newPath and folder name and replace backslashes with forward slashes
-        filename = os.path.join(folder_path, "password-encrypted.txt").replace("\\", "/")
+    # Read the password from file
+    with open(fullpath + "/file.txt", "r") as file:
+        password = file.read().strip()
 
+    c = SymmetricCipher(password=password)
+    try:
+        folder_path = os.path.join(newPath, "hembrev")  # Combine newPath and folder name
+        filename = os.path.join(folder_path, "password-encrypted.txt")
         c.decrypt_file(filename)
         os.remove(filename)
-    except OSError:
+    except OSError as e:
+        print(e)
         folder_path = os.path.join(newPath, "hembrev").replace("\\", "/")  # Combine newPath and folder name and replace backslashes with forward slashes
         filename = os.path.join(folder_path, "password.txt").replace("\\", "/")
         c.encrypt_file(filename)
+        os.remove(filename)
         decrypt()
 
 class Application(tk.Frame):
@@ -98,18 +103,26 @@ class Application(tk.Frame):
     
     #encrypt and decrypt for the password
     def encrypt(self):
-            c = SymmetricCipher(password="Super secret password")
-            try:
-                folder_path = os.path.join(newPath, "hembrev")  # Combine newPath and folder name
-                filename = os.path.join(folder_path, "password.txt")
-                c.encrypt_file(filename)
-                os.remove(filename)
-            except OSError as e:
-                print(e)
-                os.remove("password-encrypted.txt")
-                self.encrypt()
+    # Read the password from file
+        with open(fullpath + "/file.txt", "r") as file:
+            password = file.read().strip()
+
+        c = SymmetricCipher(password=password)
+        try:
+            folder_path = os.path.join(newPath, "hembrev")  # Combine newPath and folder name
+            filename = os.path.join(folder_path, "password.txt")
+            c.encrypt_file(filename)
+            os.remove(filename)
+        except OSError as e:
+            print(e)
+            os.remove("password-encrypted.txt")
+            self.encrypt()
     def decrypt(self):
-        c = SymmetricCipher(password="Super secret password")
+        # Read the password from file
+        with open(fullpath + "/file.txt", "r") as file:
+            password = file.read().strip()
+
+        c = SymmetricCipher(password=password)
         try:
             folder_path = os.path.join(newPath, "hembrev")  # Combine newPath and folder name
             filename = os.path.join(folder_path, "password-encrypted.txt")
@@ -703,7 +716,7 @@ class Application(tk.Frame):
             latest_file = files[0]
             os.startfile(latest_file)
         else:
-            messagebox.showerror("Error", f"Du har inga dokument sparade \n {e}")
+            messagebox.showerror("Error", f"Du har inga hembrev sparade. ")
 
 
     def restart_program(self):
@@ -780,7 +793,13 @@ def setup(start,run):
         logging.info('password.txt not found')
     def submit(start, run):
         def encrypt():
-            c = SymmetricCipher(password="Super secret password")
+            folder_path = os.path.join(newPath, "hembrev")  # Combine newPath and folder name
+            filename = os.path.join(folder_path, file.txt)
+            # Read the password from file
+            with open(filename, "r") as file:
+                password = file.read().strip()
+
+            c = SymmetricCipher(password=password)
             try:
                 folder_path = os.path.join(newPath, "hembrev")  # Combine newPath and folder name
                 filename = os.path.join(folder_path, "password.txt")
@@ -788,10 +807,8 @@ def setup(start,run):
                 os.remove(filename)
             except OSError as e:
                 print(e)
-                folder_path = os.path.join(newPath, "hembrev")  # Combine newPath and folder name
-                filename = os.path.join(folder_path, "password-encrypted.txt")
-                os.remove(filename)
-                decrypt()
+                os.remove("password-encrypted.txt")
+                encrypt()
                 
         global Aemail
         global Bemail
@@ -836,6 +853,9 @@ def setup(start,run):
             
         if os.path.exists('password.txt'):
             os.remove('password.txt')
+        if not os.path.exists('supergoodfile.txt'):
+            f = open("supergoodfile.txt", "x")
+            
   
         time.sleep(1)  
         def password_write(password):
